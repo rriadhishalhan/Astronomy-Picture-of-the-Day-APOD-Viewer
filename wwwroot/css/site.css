@@ -1,0 +1,44 @@
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: radial-gradient(circle at top, #0d1b2a 0%, #1b263b 45%, #17203b 100%);
+  color: #f1f5f9;
+}
+
+main {
+  color: #0f172a;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+}
+
+.card {
+  border-radius: 0.85rem;
+}
+
+.card-img-top {
+  max-height: 28rem;
+}
+
+.object-fit-cover {
+  object-fit: cover;
+}
+
+.alert {
+  border-radius: 0.75rem;
+}
+
+footer {
+  font-size: 0.95rem;
+}

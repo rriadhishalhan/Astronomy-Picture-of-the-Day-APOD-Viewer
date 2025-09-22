@@ -1,0 +1,63 @@
+@model Astronomy_Picture_of_the_Day_APOD_Viewer.Models.ApodViewModel
+@{
+    ViewData["Title"] = "Astronomy Picture of the Day";
+    var maxDate = DateTime.Today.ToString("yyyy-MM-dd");
+}
+
+<div class="row g-4">
+    <div class="col-12 col-lg-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h2 class="h5 mb-3">Pick a Date</h2>
+                <p class="text-muted small mb-4">Explore previous Astronomy Pictures of the Day from NASA's archive.</p>
+                <form method="get" asp-controller="Apod" asp-action="Index" class="d-grid gap-3">
+                    <div>
+                        <label class="form-label fw-semibold" for="apod-date">APOD Date</label>
+                        <input type="date" id="apod-date" name="date" class="form-control" value="@Model.Date.ToString("yyyy-MM-dd")" max="@maxDate" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Show APOD</button>
+                </form>
+            </div>
+        </div>
+        <div class="alert alert-info mt-3" role="alert">
+            NASA limits API requests. Consider using your own API key for higher rate limits.
+        </div>
+    </div>
+
+    <div class="col-12 col-lg-8">
+        @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+        {
+            <div class="alert alert-warning" role="alert">
+                @Model.ErrorMessage
+            </div>
+        }
+
+        @if (Model.Photo is not null)
+        {
+            <article class="card border-0 shadow-sm">
+                @if (Model.HasImage)
+                {
+                    <img src="@Model.Photo.HdUrl ?? Model.Photo.Url" class="card-img-top object-fit-cover" alt="@Model.Photo.Title" />
+                }
+                <div class="card-body">
+                    <span class="badge bg-secondary mb-2">@Model.Photo.Date.ToString("MMMM dd, yyyy")</span>
+                    <h1 class="h4 card-title">@Model.Photo.Title</h1>
+                    <p class="card-text">@Model.Photo.Explanation</p>
+
+                    @if (!Model.HasImage && !string.IsNullOrEmpty(Model.Photo.Url))
+                    {
+                        <div class="alert alert-secondary mt-3" role="alert">
+                            This APOD is a @Model.Photo.MediaType. <a class="alert-link" href="@Model.Photo.Url" target="_blank" rel="noopener noreferrer">Open it on NASA's site</a>.
+                        </div>
+                    }
+                </div>
+            </article>
+        }
+        else if (string.IsNullOrWhiteSpace(Model.ErrorMessage))
+        {
+            <div class="alert alert-secondary" role="alert">
+                Choose a date to view that day's astronomy highlight.
+            </div>
+        }
+    </div>
+</div>
