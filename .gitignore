@@ -1,0 +1,31 @@
+# Build outputs
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# IDE directories
+.vs/
+.idea/
+.vscode/
+
+# ASP.NET bundling
+wwwroot/lib/
+
+# Logs
+yarn-error.log
+npm-debug.log
+*.log
+
+# Environment and secrets
+appsettings.Development.json
+appsettings.*.local.json
+.env
+
+# OS generated
+Thumbs.db
+.DS_Store
